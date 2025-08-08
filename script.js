@@ -13,6 +13,15 @@ renderer.setSize( window.innerWidth, window.innerHeight );
 renderer.setAnimationLoop( animate );
 document.body.appendChild( renderer.domElement );
 
+const controls = new OrbitControls( camera, renderer.domElement );
+controls.addEventListener( 'change', render ); // use if there is no animation loop
+controls.minDistance = 2;
+controls.maxDistance = 10;
+controls.target.set( 0, 0, - 0.2 );
+controls.update();
+
+window.addEventListener( 'resize', onWindowResize );
+
 const geometry = new THREE.BoxGeometry( 1, 1, 1 );
 const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
 const cube = new THREE.Mesh( geometry, material );
